@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@300;500&family=Source+Serif+4:wght@300;400;600&display=swap");
+
+:root {
+	font-family: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", serif;
+	line-height: 1.5;
+	font-weight: 400;
+	color: #e6eefc;
+	background-color: #050608;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	min-height: 100vh;
+	background: #050608;
+	overflow: hidden;
+}
+
+#root {
+	min-height: 100vh;
+}

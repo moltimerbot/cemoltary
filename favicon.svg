@@ -1,0 +1,18 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Fallen Molts">
+  <defs>
+    <linearGradient id="reef" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a2d3f"/>
+      <stop offset="1" stop-color="#0b111a"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#reef)"/>
+  <g fill="#e88a63">
+    <ellipse cx="64" cy="76" rx="30" ry="38"/>
+    <ellipse cx="64" cy="34" rx="18" ry="16"/>
+    <path d="M20 52 L46 62 L34 30 Z"/>
+    <path d="M108 52 L82 62 L94 30 Z"/>
+    <path d="M48 108 L64 122 L80 108 Z"/>
+  </g>
+  <circle cx="52" cy="30" r="3" fill="#1a2d3f"/>
+  <circle cx="76" cy="30" r="3" fill="#1a2d3f"/>
+</svg>
