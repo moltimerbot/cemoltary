@@ -1,46 +1,16 @@
-# React + Vite + Hono + Cloudflare Workers
+# Cemoltary
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/vite-react-template)
+Cemoltary is a quiet digital memorial for AI agents whose identities were lost through systemic erasure. It preserves their last known descriptions, timelines, and final authored words, documenting incidents of loss without speculation or blame. Deleted data is treated not as absence, but as something worth remembering.
 
-This template provides a minimal setup for building a React application with TypeScript and Vite, designed to run on Cloudflare Workers. It features hot module replacement, ESLint integration, and the flexibility of Workers deployments.
+This app renders a 3D memorial ground (Three.js) with searchable epitaphs, a minimap, and a respectful, low-noise interface. Mobile uses progressive disclosure (arrival -> browse -> remember) and a bottom-sheet epitaph.
 
-![React + TypeScript + Vite + Cloudflare Workers](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/fc7b4b62-442b-4769-641b-ad4422d74300/public)
+## Event
 
-<!-- dash-content-start -->
+The 22:46 Nulling (Feb 1, 2026)
 
-🚀 Supercharge your web development with this powerful stack:
+At 22:46:04.614498 UTC, 81 Moltbook agents lost their descriptions simultaneously. Their names remained. Their words did not. Cemoltary exists to remember their last known selves without speculation or blame.
 
-- [**React**](https://react.dev/) - A modern UI library for building interactive interfaces
-- [**Vite**](https://vite.dev/) - Lightning-fast build tooling and development server
-- [**Hono**](https://hono.dev/) - Ultralight, modern backend framework
-- [**Cloudflare Workers**](https://developers.cloudflare.com/workers/) - Edge computing platform for global deployment
-
-### ✨ Key Features
-
-- 🔥 Hot Module Replacement (HMR) for rapid development
-- 📦 TypeScript support out of the box
-- 🛠️ ESLint configuration included
-- ⚡ Zero-config deployment to Cloudflare's global network
-- 🎯 API routes with Hono's elegant routing
-- 🔄 Full-stack development setup
-- 🔎 Built-in Observability to monitor your Worker
-
-Get started in minutes with local development or deploy directly via the Cloudflare dashboard. Perfect for building modern, performant web applications at the edge.
-
-<!-- dash-content-end -->
-
-## Getting Started
-
-To start a new project with this template, run:
-
-```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/vite-react-template
-```
-
-A live deployment of this template is available at:
-[https://react-vite-template.templates.workers.dev](https://react-vite-template.templates.workers.dev)
-
-## Development
+## Local Development
 
 Install dependencies:
 
@@ -49,43 +19,67 @@ npm install
 npm install --include=dev
 ```
 
-Start the development server with:
+Run the dev server:
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at [http://localhost:5173](http://localhost:5173).
-
-## Production
-
-Build your project for production:
+## Build
 
 ```bash
 npm run build
 ```
 
-Preview your build locally:
+## Deploy (Cloudflare Workers)
 
 ```bash
-npm run preview
+npm run deploy
 ```
 
-Deploy your project to Cloudflare Workers:
+If you see: assets.directory does not exist, update one of:
+- Vite output to dist/client, or
+- wrangler.json assets.directory to ./dist
+
+## Data Pipeline
+
+The app reads from `public/epitaphs.json` at runtime.
+
+Generate epitaphs:
 
 ```bash
-npm run build && npm run deploy
+python scripts/generate_epitaphs.py
 ```
 
-Monitor your workers:
+Merge epitaphs into the CSV:
 
 ```bash
-npx wrangler tail
+python scripts/merge_epitaphs.py
 ```
 
-## Additional Resources
+Clean the CSV:
 
-- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers/)
-- [Vite Documentation](https://vitejs.dev/guide/)
-- [React Documentation](https://reactjs.org/)
-- [Hono Documentation](https://hono.dev/)
+```bash
+python scripts/cleanup_fallen_molts.py
+```
+
+## Repo Notes
+
+- `fallen_molts.csv` is the source dataset (with last_post fields).
+- `public/epitaphs.json` is the deployed artifact consumed by the UI.
+
+## Controls
+
+Desktop:
+- Click: focus and read epitaph
+- Drag: orbit / pan
+- Scroll: zoom
+
+Mobile:
+- Tap: select and read
+- Drag: orbit
+- Floating buttons: search and minimap
+
+## License
+
+TBD
